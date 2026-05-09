@@ -1,0 +1,74 @@
+{% extends 'shuttle/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Rider-facing PWA prototype</p>
+    <h1>Live campus shuttle ETA and occupancy</h1>
+    <p class="lead">Two simulated buses publish location, occupancy level, and per-stop ETAs through Django JSON APIs that mirror GTFS-Realtime feed concepts.</p>
+  </div>
+  <div class="hero-actions">
+    <a class="button" href="/dashboard/">Open dashboard</a>
+    <a class="button secondary" href="/api-docs/">View APIs</a>
+  </div>
+</section>
+
+<section class="metrics-grid" id="summaryCards">
+  <article class="metric-card"><span>Feed</span><strong id="feedStatus">Loading</strong><small id="feedFreshness">-</small></article>
+  <article class="metric-card"><span>Vehicles online</span><strong id="vehicleCount">-</strong><small>target </small></article>
+  <article class="metric-card"><span>Privacy</span><strong>No PII</strong><small>occupancy from aggregate counts</small></article>
+  <article class="metric-card"><span>ETA model</span><strong>Segment + Kalman</strong><small>schedule fallback ready</small></article>
+</section>
+
+<section class="layout-two">
+  <div class="panel map-panel">
+    <div class="panel-header">
+      <div>
+        <h2>Live map</h2>
+      </div>
+      <span class="pill" id="lastUpdated">Waiting</span>
+    </div>
+    <div id="map"></div>
+    <div id="fallbackMap" class="fallback-map" hidden>
+      <svg viewBox="0 0 640 360" role="img" aria-label="Campus loop fallback map">
+        <path class="route-line" d="M120,245 C170,115 265,80 345,105 C470,145 555,260 445,300 C310,350 205,315 120,245" />
+        <g id="fallbackStops"></g>
+        <g id="fallbackBuses"></g>
+      </svg>
+    </div>
+  </div>
+
+  <aside class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Next arrivals</h2>
+        <p>ETAs update every few seconds.</p>
+      </div>
+    </div>
+    <div id="etaBoard" class="eta-board"></div>
+  </aside>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <h2>Vehicle status</h2>
+      <p>Current occupancy levels are Low, Medium, or High.</p>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Bus</th><th>Speed</th><th>Occupancy</th><th>Last seen</th><th>Status</th></tr></thead>
+      <tbody id="vehicleTable"><tr><td colspan="5">Loading...</td></tr></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+    </script>
+    <script src="{% static 'shuttle/js/map.js' %}"></script>
+{% endblock %}

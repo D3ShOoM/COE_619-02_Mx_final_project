@@ -1,0 +1,49 @@
+{% extends 'shuttle/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero compact">
+  <div>
+    <p class="eyebrow">Operator dashboard v1</p>
+    <h1>Feed freshness, bus last-seen, and demo logs</h1>
+    <p class="lead">This page supports local debugging and demo validation before physical bus testing.</p>
+  </div>
+  <div class="hero-actions">
+    <a class="button" href="/">Open rider map</a>
+    <a class="button secondary" href="/admin/">Django admin</a>
+  </div>
+</section>
+
+<section class="metrics-grid">
+  <article class="metric-card"><span>Status</span><strong id="dashStatus">Loading</strong><small id="dashTimestamp">-</small></article>
+  <article class="metric-card"><span>Online vehicles</span><strong id="dashOnline">-</strong><small id="dashVehicleCount">-</small></article>
+  <article class="metric-card"><span>Feed freshness</span><strong id="dashFreshness">-</strong><small>seconds since latest ping</small></article>
+  <article class="metric-card"><span>Position pings</span><strong id="dashPings">-</strong><small>stored in DB</small></article>
+</section>
+
+<section class="layout-two dashboard-grid">
+  <div class="panel">
+    <div class="panel-header">
+      <div><h2>Fleet</h2><p>Last-known location and occupancy.</p></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Bus</th><th>Route</th><th>Progress</th><th>Speed</th><th>Occupancy</th><th>Age</th></tr></thead>
+        <tbody id="dashFleet"><tr><td colspan="6">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div><h2>System log</h2><p>Recent simulator and ingestion events.</p></div>
+    </div>
+    <div id="eventLog" class="event-log">Loading...</div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'shuttle/js/dashboard.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title|default:"Campus Shuttle Demo" }}</title>
+  <link rel="stylesheet" href="{% static 'shuttle/css/app.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">CS</span>
+      <span>
+        <strong>Campus Shuttle</strong>
+        <small>Privacy-preserving ETA + Occupancy Demo</small>
+      </span>
+    </a>
+    <nav>
+      <a href="/">Rider Map</a>
+      <a href="/dashboard/">Dashboard</a>
+      <a href="/api-docs/">API</a>
+      <a href="/about/">About</a>
+      <a href="/admin/">Admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    Demo defaults: 4 stops, 2 simulated buses, JSON GTFS-RT-style feeds, no cameras, no device IDs.
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

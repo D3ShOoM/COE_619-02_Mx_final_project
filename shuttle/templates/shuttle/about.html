@@ -1,0 +1,27 @@
+{% extends 'shuttle/base.html' %}
+
+{% block content %}
+<section class="hero compact">
+  <div>
+    <p class="eyebrow">Project alignment</p>
+    <h1>What this Django demo implements</h1>
+    <p class="lead">A software-first prototype for a privacy-preserving campus shuttle information system.</p>
+  </div>
+</section>
+
+<section class="panel prose">
+  <h2>Implemented demo capabilities</h2>
+  <ul>
+    <li><strong>Django backend:</strong> models for routes, stops, buses, GPS pings, occupancy readings, segment stats, and events.</li>
+    <li><strong>Real-time location:</strong> two simulated buses with API-refresh and optional continuous management command simulator.</li>
+    <li><strong>GTFS-RT-style feeds:</strong> JSON VehiclePositions and TripUpdates endpoints for easy inspection in demos.</li>
+    <li><strong>ETA:</strong> segment travel-time estimates with a scalar Kalman update helper.</li>
+    <li><strong>Occupancy:</strong> Low/Medium/High levels from counts and capacity thresholds with hysteresis.</li>
+    <li><strong>Privacy:</strong> no cameras, no audio, no phone/device identifiers; only aggregate count and vehicle location data.</li>
+    <li><strong>Operator dashboard:</strong> last-seen, feed freshness, occupancy, pings, and logs.</li>
+  </ul>
+
+  <h2>Next integration points</h2>
+  <p>Replace the seeded coordinates with final stops, connect GNSS hardware to <code>/api/ingest/gps/</code>, connect the dual-IR count logic to <code>/api/ingest/occupancy/</code>, and switch SQLite to PostgreSQL/Timescale for longer trials.</p>
+</section>
+{% endblock %}
